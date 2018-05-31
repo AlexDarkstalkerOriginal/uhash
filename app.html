@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+
+
+<head>
+
+	<meta charset="UTF-8">
+
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+	<meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+	<meta http-equiv="Expires" content="Mon, 26 Jul 1997 05:00:00 GMT">
+	<meta http-equiv="Pragma" content="no-cache">
+	<title>uHash</title>	
+</head>    
+
+
+
+<body>
+	<header>
+		<div class="logo"><img src="img/uhash.svg" alt=""></div>
+		<div class="nav_info">
+			<a href="#faq" class="faq popup">FAQ</a>
+			<a href="#about" class="about popup">Contact</a>
+		</div>
+	</header>
+	<div id="app" class="content">		
+		<div class="intro">
+			<h1>Register documents on Nebulas Blockchain</h1>
+			<div class="get_hash">		
+				<h2>Сomplete the form to register</h2>
+				<div class="item label_file">				
+					<label for="file">File: <span>filename</span> <img class="file_img" src="img/icons8-upload-64.png" alt=""></label>		
+					<input required="true" name="file" type="file" id="file">	
+				</div>
+				<div class="item">				
+					<label for="hash">Hash: </label>		
+					<input name="hash" disabled="true" type="text" id="hash">
+				</div>			
+				<div class="item">
+					<label for="mail">E-mail: </label>
+					<input required="true" name="mail" type="mail" id="mail" placeholder="input your e-mail">
+				</div>
+				<button class="send">Register document</button>
+
+				<input type="text" disabled="true" id="input">
+				<button class="md_convert" onclick="document.getElementById('hash').value = hex_md5(document.getElementById('input').value)">md5</button>				
+
+			</div>
+
+
+			<div class="info">		
+				<h2>Search your document</h2>
+				<div class="by_hash">
+					<h3>By hash</h3>
+					<div class="item">
+						<label for="hash_search">Hash: </label>	
+						<input type="text" class="hash_search">
+					</div>
+					<button class="send">Search</button>			
+				</div>
+				<div class="by_file">
+					<h3>By file</h3>
+					<div class="item label_file">
+						<label for="file_search">File: <span>filename </span> <img class="file_img" src="img/icons8-upload-64.png" alt=""></label>		
+						<input name="file_search" type="file" id="file_search">	
+					</div>
+					<button class="send">Search</button>
+
+					<input type="text" id="hash_for_search">
+					<button class="md_convert_search" onclick="document.getElementById('hash_for_search').value = hex_md5(document.getElementById('input').value)">md5</button>
+				</div>
+				<div class="result">
+					<h3>Result</h3>
+					<p class="time_res">Time of addition: <span></span></p>
+					<p class="mail_res">Owner's mail: <span></span></p>
+					<p class="wallet_res">Owner's wallet address: <span></span></p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="faq" class="mfp-fade mfp-hide">
+		<div class="container_faq">
+			<h1>FAQ</h1>	
+
+			<b>Do I need NAS to use uHash?</b>
+			<p>You only need some gas to complete the transaction.</p>
+
+			<b>Do you store my documents?</b>
+			<p>No. We do not store the contents of your document anywhere.</p>
+
+			<b>Why do you need my email?</b>
+			<p>It's comfortable. Imagine what you want to prove that the owner of the file. Ownership of the mail specified when creating the hash automatically proves that you are the owner of the file.</p>
+
+			<b>Are the contents of my documents safe?</b>
+			<p>Absolutely! We only store the cryptographic hash of your documents. The hash is calculated on your computer and serves as a fingerprint for your document. It is impossible to reconstruct your document from this hash.</p>
+
+			<b>Why should I use uHash</b>
+			<p>uHash is implemented using a smart contract on the Nebulas blockchain. When you record a document using uHash you are guaranteed that this record is immutable. This information cannot be lost, it cannot be modified even by governments and you can always verify this information even if uHash is down.</p>
+			
+			<b>Can I use uHash for contracts?</b>
+			<p>Yes. Scan a copy of the physically signed contract and DocStamp it!</p>
+		
+			<b>When should I use uHash?</b>
+			<p>-When you have sensitive documents that nobody should see. Sensitive contracts, patent related documents.</p>
+			<p>-When you need to timestamp data so that you can later prove that you possessed it.</p>
+			<p>-When you need to preserve data integrity - The hash (md5) that we compute maintains a fingerprint of your document. This changes with any modification to the original document.</p>
+			<p>-When you want the peace of mind that your document record is stored on a decentralized system that prevents any manipulation.</p>
+			<p>-When you want to save yourself a trip to the notary.</p>
+		</div>
+	</div>
+
+	<div id="about" class="mfp-fade mfp-hide">
+		<h1>Contact</h1>
+		<span>E-mail: 
+			<a href="mailto:alexdarkstalkeroriginal@gmail.com">alexdarkstalkeroriginal@gmail.com</a>
+		</span>
+	</div>
+
+	<a href="#transaction" class="transaction" style="position: absolute; width: 0.1px; opacity: .1"></a>	
+	<div id="transaction" class="mfp-hide mfp-fade">
+		<p>Transaction is <span class="status_trans"></span></p>
+		<img src="img/pending.gif" alt="">
+		<div class="hash"></div>			
+	</div>
+
+	<div class="noExtension" style="display: none"> 
+		NOTE: Please install <a target="_blank" href="https://github.com/ChengOrangeJu/WebExtensionWallet">WebExtensionWallet</a>  to use BlackJack Nebulas or try CTRL+F5
+	</div>
+	<div class="errNetwork" style="display: none">
+		NOTE: Sorry, you use incorrect net
+	</div>	
+
+	<script type="text/javascript" src="lib/md5-min.js"></script>
+	<script src='lib/jquery-3.3.1.min.js'></script>
+	<link rel="stylesheet" href="lib/main.css">	
+	<script src='lib/nebPay.js'></script>    	
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src='lib/nebulas.js'></script>
+    <script src='lib/jquery.magnific-popup.js'></script>
+    <script src="lib/common.js"></script>        
+    <link rel="stylesheet" href="lib/magnific-popup.css">    
+    <link href="https://fonts.googleapis.com/css?family=Titillium+Web:200,300,400,700,900" rel="stylesheet">
+    <script>
+    
+	</script>
+</body>
+</html>
